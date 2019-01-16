@@ -4,9 +4,11 @@ import 'package:validator/validator.dart' as v;
 
 
 void test(Map options) {
-  List args = options['args'];
+  List<dynamic> args = options['args'];
+  args = args.map<dynamic>((dynamic v){return v;}).toList();
   if (options['valid'] != null) {
-    List toTest = options['valid'];
+    List<dynamic> toTest = options['valid'];
+    toTest = toTest.map<dynamic>((dynamic v){return v;}).toList();
     toTest.forEach((v) {
       args.insert(0, v);
       var f = options["validator"].toString();
@@ -18,8 +20,10 @@ void test(Map options) {
   }
 
   args = options['args'];
+  args = args.map<dynamic>((dynamic v){return v;}).toList();
   if (options['invalid'] != null) {
     List toTest = options['invalid'];
+    toTest = toTest.map<dynamic>((dynamic v){return v;}).toList();
     toTest.forEach((v) {
       args.insert(0, v);
       var f = options["validator"].toString();

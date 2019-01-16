@@ -4,7 +4,8 @@ import 'package:validator/validator.dart' as s;
 
 
 void test(Map options) {
-  List args = options['args'];
+  List<dynamic> args = options['args'];
+  args = args.map<dynamic>((dynamic v){return v;}).toList();
 
   options['expect'].keys.forEach((input) {
     args.insert(0, input);
@@ -14,7 +15,8 @@ void test(Map options) {
     var expected = options['expect'][input];
 
     if ((expected is double || expected is int) && expected.isNaN == true && result.isNaN == true) {
-      return true;
+      //return true;
+      return;
     }
 
     if (result != expected) {
@@ -59,7 +61,7 @@ void testToFloat() {
       '1': 1.0,
       '2.': 2.0,
       '-1.4': -1.4,
-      'foo': double.NAN
+      'foo': double.nan
     }
   });
 }
@@ -72,7 +74,7 @@ void testToInt() {
     'expect': {
       '1.4': 1,
       '2.': 2,
-      'foo': double.NAN
+      'foo': double.nan
     }
   });
 }

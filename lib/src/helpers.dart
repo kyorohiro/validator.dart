@@ -11,10 +11,16 @@ _shift(List l) {
   return null;
 }
 
-Map _merge(Map obj, defaults) {
+Map _merge(Map<dynamic,dynamic> obj, defaults) {
   if (obj == null) {
     obj = new Map();
   }
-  defaults.forEach((key, val) => obj.putIfAbsent(key, () => val));
+
+  defaults.forEach((key, val) {
+    if(!obj.containsKey(key)) {
+      obj[key] = val;
+    }
+    // obj.putIfAbsent(key, () => val);
+  });
   return obj;
 }
